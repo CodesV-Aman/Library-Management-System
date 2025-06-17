@@ -33,6 +33,11 @@ public class AuthenticationService {
 
 	public User registerNormalUser(RegisterRequestDTO registerRequestDTO) {
 
+		
+		if (registerRequestDTO.getPassword() == null || registerRequestDTO.getPassword().isBlank()) {
+	        throw new IllegalArgumentException("Password cannot be null or empty");
+	    }
+		
 		if (userRepository.findByUsername(registerRequestDTO.getUsername()).isPresent()) {
 			throw new RuntimeException("User already registered");
 
@@ -52,6 +57,7 @@ public class AuthenticationService {
 
 	public LoginResponseDTO loginRequestDTO(LoginRequestDTO loginRequestDTO) {
 
+		
 		authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequestDTO.getUsername(), loginRequestDTO.getPassword()));
 

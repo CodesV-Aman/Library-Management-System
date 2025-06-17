@@ -34,10 +34,11 @@ public class SecurityConfig {
 		http
         .csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/auth/**").permitAll()  // ✅ Fixed typo
-            .requestMatchers("/admin/**").hasRole("ADMIN")
-            .anyRequest().authenticated()
-        )
+        	    .requestMatchers("/auth/registernormaluser").permitAll()
+        	    .requestMatchers("/auth/**").permitAll()
+        	    .requestMatchers("/admin/**").hasRole("ADMIN")
+        	    .anyRequest().authenticated()
+        	)
         .sessionManagement(session -> session
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         )
@@ -64,7 +65,6 @@ public class SecurityConfig {
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-		// TODO Auto-generated method stub
 		return new BCryptPasswordEncoder();
 	}
 	

@@ -13,6 +13,7 @@ import com.library.dto.RegisterRequestDTO;
 import com.library.entity.User;
 import com.library.services.AuthenticationService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -30,7 +31,7 @@ public class AuthController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO loginRequestDTO) {
+	public ResponseEntity<LoginResponseDTO> login(@Valid @RequestBody LoginRequestDTO loginRequestDTO) {
 
 		return ResponseEntity.ok(authenticationService.loginRequestDTO(loginRequestDTO));
 	}
